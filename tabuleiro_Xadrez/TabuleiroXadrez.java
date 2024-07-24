@@ -18,15 +18,15 @@ public class TabuleiroXadrez {
 
 		imprimirBoard(board);
 		int peaoMovido, numeroCasas = 0;
+		String cor = "";
 
 		System.out.println("Qual Peao voce gostaria de mover? Escolha a Coluna de 1 a 8");
 		while (true) {
-			peaoMovido = sc.nextInt() - 1;
+			peaoMovido = sc.nextInt();
 			if (peaoMovido >= 1 || peaoMovido >= 8) break;
 			System.out.println("Coluna Inválida. \n");
 			System.out.println("Qual Peao voce gostaria de mover? Escolha a Coluna de 1 a 8");
 		}
-		
 		
 		System.out.println("Quantas casas você gostaria de mover o peao selecionado?");
 		while (true) {
@@ -35,9 +35,26 @@ public class TabuleiroXadrez {
 			System.out.println("Movimento Inválido. \n");
 			System.out.println("Quantas casas você gostaria de mover o peao selecionado?");
 		}
+
+		System.out.println("Qual a cor do peao que deve ser movido? B ou W");
+		while (true) {
+			cor = sc.nextLine();
+			if (cor.equals("B") || cor.equals("W")) break;
+			System.out.println("Cor Inválida. \n");
+			System.out.println("Qual a cor do peao que deve ser movido? B ou W");
+		}
 		
-		board[peaoMovido][2] = board[peaoMovido+numeroCasas][2];
-		board[peaoMovido][2] = " ";
+		int coluna = peaoMovido - 1;
+
+		if (board[6][coluna].equals("p") && cor.equals("W")) {
+			board[6 - numeroCasas][coluna] = "p";
+            board[6][coluna] = " ";
+		} 
+		
+		else if (board[1][coluna].equals("P") && cor.equals("B")) {
+            board[1 + numeroCasas][coluna] = "P";
+            board[1][coluna] = " ";
+        }
 
 		imprimirBoard(board);
 		sc.close();
